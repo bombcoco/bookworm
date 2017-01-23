@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import time
+import sys
 
 
 class Crawl:
@@ -47,9 +48,11 @@ class Crawl:
 if __name__ == '__main__':
 
     crawl = Crawl()
-    for i in range(50):
+    for i in range(5):
 
         print("-", end='')
+        sys.stdout.flush()
+
         i += 1
         startTime = time.time()
 
@@ -65,3 +68,5 @@ if __name__ == '__main__':
         if endTime - startTime < 1:
             time.sleep(1)
             print("|", end='')
+
+        sys.stdout.flush()
