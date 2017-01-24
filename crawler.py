@@ -9,12 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class Crawl:
-
-    def test(self, url):
-
-        r = requests.get(url)
-        print(r.text)
+class Crawler:
 
     def requestURL(self, data):
 
@@ -25,10 +20,6 @@ class Crawl:
             'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6,zh-TW;q=0.4',
             'Cache-Control': 'no-cache',
             'Connection': 'keep-alive',
-            'DNT': '1',
-            'Host': 'm.biqudao.com',
-            'Pragma': 'no-cache',
-            'Upgrade-Insecure-Requests': '1',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
         }
         r = requests.get(url, headers=custom_headers)
@@ -91,7 +82,7 @@ class Crawl:
 
 if __name__ == '__main__':
 
-    crawl = Crawl()
+    crawler = Crawler()
 
     startPage = 1662170
     for i in range(500):
@@ -99,21 +90,21 @@ if __name__ == '__main__':
         print("-", end='')
         sys.stdout.flush()
 
-        i += 1
         startTime = time.time()
 
         data = {'content': "", 'url': "http://m.biqudao.com/bqge1618/" +
                 str(startPage + i) + ".html", 'all': []}
 
-        d = crawl.requestURL(data)
-        d = crawl.getBIQUDAOContent(d)
+        d = crawler.requestURL(data)
+        d = crawler.getBIQUDAOContent(d)
 
-        crawl.writeFile(d, filename='book.txt')
+        crawler.writeFile(d, filename='book.txt')
 
         endTime = time.time()
+        intervalTime = endTime - startTime
 
-        if endTime - startTime < 1:
-            time.sleep(1)
+        if intervalTime < 1:
+            time.sleep(intervalTime)
             print("|", end='')
 
         sys.stdout.flush()

@@ -9,5 +9,5 @@
 ## Run
 
 ```bash
-python3 crawl.py
+python3 crawler.py
 ```
